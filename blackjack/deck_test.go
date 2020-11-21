@@ -172,6 +172,21 @@ func TestShuffle(t *testing.T) {
 	if beforeShuffleCard == afterShuffleCard {
 		t.Errorf("shuffle deck failed")
 	}
+	// check card restacks when reaching 0 cards
+	for i := 0; i < 52; i++ {
+		// draw card
+		deck.Draw()
+	}
+	// check all cards have been drawn
+	if len(deck.Cards) != 0 {
+		t.Errorf("invalid num cards detected before shuffling")
+	}
+	// check if shuffle reuses dealt cards
+	deck.Shuffle()
+	// check all cards have been drawn
+	if len(deck.Cards) == 0 {
+		t.Errorf("invalid num cards detected after shuffling")
+	}
 }
 
 func benchmarkShuffle(i int, b *testing.B) {
