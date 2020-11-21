@@ -7,7 +7,7 @@ import (
 	"github.com/abmamo/cards/blackjack"
 )
 
-// BlackjackClie : play blackjack in terminal
+// BlackjackCli : play blackjack in terminal
 func BlackjackCli() {
 	// create var to get player name
 	var playerName string
