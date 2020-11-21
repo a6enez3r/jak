@@ -7,6 +7,6 @@ coverage:
 build:
 	go build -o blackjack.gm main.go
 run:
-	go run main.go
+	go run main.go cli.go
 web:
 	gotty -w bash -r
