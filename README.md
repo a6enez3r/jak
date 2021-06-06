@@ -27,3 +27,14 @@ go run main.go cli.go
 or 
 ```
 make run
+
+## docker
+if you don't have go installed locally (but have docker) you can
+```
+make up-cli
+```
+to open the repo in a local `go` container or
+```
+make up-web
+```
+to expose the docker terminal over web
