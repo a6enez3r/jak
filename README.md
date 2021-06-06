@@ -27,6 +27,7 @@ go run main.go cli.go
 or 
 ```
 make run
+```
 
 ## docker
 if you don't have go installed locally (but have docker) you can
