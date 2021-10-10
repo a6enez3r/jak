@@ -35,7 +35,7 @@ vet:
 lint:
 	golint .
 build:
-	go build -o blackjack.gm main.go cli.go
+	go build -o blackjack.game main.go cli.go
 run:
 	go run main.go cli.go
 web:
