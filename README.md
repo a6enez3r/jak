@@ -2,40 +2,32 @@
 cli blackjack game written in go
 
 ## quickstart
-### terminal
-to play game in terminal
-```
-go run main.go cli.go 
-```
-or 
-```
-make run
-```
-### browser
-to play game in browser based terminal
-```
-gotty -w bash -r
-```
-or 
-```
-make web
-```
-then navigate to ```localhost:8080``` and start game
-```
-go run main.go cli.go 
-```
-or 
-```
-make run
+download the binary for your platform using `curl`
 ```
 
-## docker
-if you don't have go installed locally (but have docker) you can
 ```
-make up-cli
+and run it
 ```
-to open the repo in a local `go` container or
+    ./blackjack.game
 ```
-make up-web
+
+## develop
 ```
-to expose the docker terminal over web
+    list of available app commands
+
+    lint            - lint app.
+    test            - test app.
+    test            - test app.
+    vet             - vet app.
+    build           - build app.
+    serve           - serve app.
+    benchmark       - benchmark app.
+
+    docker commands
+    up-env          - start dev container
+    up-cli          - start cli container
+    exec-env        - exec into dev container
+    exec-cli        - exec into cli container
+    purge-env       - purge dev container
+    purge-cli       - purge cli container
+```

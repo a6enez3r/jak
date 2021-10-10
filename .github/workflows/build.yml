@@ -36,25 +36,15 @@ jobs:
         go version
         go get -u golang.org/x/lint/golint
         sudo apt-get install build-essential
-        
-    # Run build of the application
-    #- name: Run build
-    #  run: make build
-      
+
     # Run vet & lint on the code
-    #- name: Run vet & lint
-    #  run: |
-    #    go vet .
-    #    golint .
-    
-    # Make .env file
-    #- name: Make .env file
-    #  uses: SpicyPizza/create-envfile@v1
-    #  with:
-    #    envkey_ATLAS_URI: ${{ secrets.ATLAS_URI }}
-    #    envkey_DB_NAME: ${{ secrets.DB_NAME }}
-    #    file_name: .env
+    - name: Run vet & lint
+      run: make lint
 
     # Run testing on the code
     - name: Run testing
       run: make test
+
+    # Run build of the application
+    - name: Run build
+      run: make build

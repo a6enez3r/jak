@@ -22,7 +22,6 @@ help:
 
 db_container_env := cards_env
 db_container_cli := cards_cli
-db_container_web := cards_web
 
 test:
 	go test -v ./...
@@ -35,18 +34,14 @@ vet:
 lint:
 	golint .
 build:
-	go build -o blackjack.game main.go cli.go
+	chmod +x ./scripts/go-build-all && ./scripts/go-build-all && mv cards-* builds
 run:
 	go run main.go cli.go
-web:
-	gotty -w bash -r
 
 build-env:
 	docker build -t ${db_container_env} -f dockerfiles/Dockerfile.cli . 
 build-cli:
 	docker build -t ${db_container_cli} -f ./dockerfiles/Dockerfile.cli .
-build-web:
-	docker build -t ${db_container_web} -f ./dockerfiles/Dockerfile.web .
 up-env: build-env
 	$(eval container_id = $(shell (docker ps -aqf "name=${db_container_env}")))
 	$(if $(strip $(container_id)), \
@@ -59,12 +54,6 @@ up-cli:
 		@echo "existing env container found. please run make purge-env",\
 		@echo "running env container..." && docker run -it -d -v $(CURDIR):/go/src/ --name ${db_container_cli} ${db_container_cli}:latest /bin/bash)
 	$(endif)
-up-web:
-	$(eval container_id = $(shell (docker ps -aqf "name=${db_container_web}")))
-	$(if $(strip $(container_id)), \
-		@echo "existing env container found. please run make purge-env",\
-		@echo "running env container..." && docker run -it -d -p 8080:8080 -v $(CURDIR):/go/src/ --name ${db_container_web} ${db_container_web}:latest /bin/bash)
-	$(endif)
 exec-env:
 	$(eval container_id = $(shell (docker ps -aqf "name=${db_container_env}")))
 	$(if $(strip $(container_id)), \
@@ -73,12 +62,6 @@ exec-env:
 	$(endif)
 exec-cli:
 	$(eval container_id = $(shell (docker ps -aqf "name=${db_container_cli}")))
-	$(if $(strip $(container_id)), \
-		@echo "exec into env container..." && docker exec -it ${container_id} bash,\
-		@echo "env container not running.")
-	$(endif)
-exec-web:
-	$(eval container_id = $(shell (docker ps -aqf "name=${db_container_web}")))
 	$(if $(strip $(container_id)), \
 		@echo "exec into env container..." && docker exec -it ${container_id} bash,\
 		@echo "env container not running.")
@@ -93,11 +76,5 @@ purge-cli:
 	$(eval container_id = $(shell (docker ps -aqf "name=${db_container_cli}")))
 	$(if $(strip $(container_id)), \
 		@echo "purging env container..." && docker stop ${db_container_cli} && docker rm ${db_container_cli},\
-		@echo "env container not running.")
-	$(endif)
-purge-web:
-	$(eval container_id = $(shell (docker ps -aqf "name=${db_container_web}")))
-	$(if $(strip $(container_id)), \
-		@echo "purging env container..." && docker stop ${db_container_web} && docker rm ${db_container_web},\
 		@echo "env container not running.")
 	$(endif)
