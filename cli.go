@@ -5,6 +5,8 @@ import (
 	"strconv"
 
 	"github.com/abmamo/cards/blackjack"
+
+	"github.com/fatih/color"
 )
 
 // Cli : cli wrapper over blackjack game
@@ -17,8 +19,9 @@ func Init() Cli {
 	// create var to get player name
 	var playerName string
 	// user prompt
-	fmt.Println("name:- ")
-	fmt.Println("-----------------")
+	color.Green("-----------------")
+	color.Yellow("your name")
+	color.Green("-----------------")
 	// take input from user
 	fmt.Scanln(&playerName)
 	// init blackjack
@@ -40,8 +43,9 @@ func (c *Cli) Play() {
 			// create var to get player buy
 			var betAmountStr string
 			// user prompt
-			fmt.Println("bet:- ")
-			fmt.Println("-----------------")
+			color.Green("-----------------")
+			color.Yellow("your buy-in")
+			color.Green("-----------------")
 			// take input from user & store
 			fmt.Scanln(&betAmountStr)
 			// convert to int
@@ -52,8 +56,9 @@ func (c *Cli) Play() {
 		// create var to get player action
 		var playerAction string
 		// user prompt
-		fmt.Println("action (hit/stand/double):- ")
-		fmt.Println("-----------------")
+		color.Green("-----------------")
+		color.Yellow("action (hit/stand/double)")
+		color.Green("-----------------")
 		// take input from user & store
 		fmt.Scanln(&playerAction)
 		// start game play
@@ -63,8 +68,9 @@ func (c *Cli) Play() {
 			// show game info
 			c.Game.Display()
 			// user prompt
-			fmt.Println("another hand? (y/n)")
-			fmt.Println("-----------------")
+			color.Green("-----------------")
+			color.Yellow("another hand? (y/n)")
+			color.Green("-----------------")
 			// take input from user & store
 			fmt.Scanln(&playerAction)
 			// if another hand

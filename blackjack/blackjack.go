@@ -3,8 +3,13 @@ package blackjack
 import (
 	"encoding/json"
 	"fmt"
+	"math"
 	"io/ioutil"
 	"path/filepath"
+
+	"github.com/fatih/color"
+
+
 )
 
 // Blackjack : will have a player, a dealer and a deck
@@ -18,40 +23,86 @@ type Blackjack struct {
 	LastAction string  `json:"lastAction"` // last player action
 }
 
+func (b *Blackjack) Result() {
+	if b.PlayerSum > 21 && b.DealerSum <= 21 {
+		// display results
+		color.Red("-----------------")
+		color.Green("result")
+		color.Red("-----------------")
+		fmt.Println("your sum:", b.PlayerSum)
+		fmt.Println("dealer sum:", b.DealerSum)
+		fmt.Println("dealer wins: ", b.Player.CurrentBet)
+		fmt.Println("wallet: ", b.Player.Wallet)
+		color.Red("-----------------")
+	}
+	if b.DealerSum > 21 && b.PlayerSum <= 21 {
+		// update wallet
+		b.Player.Wallet += 2 * b.Player.CurrentBet
+		// display results
+		color.Red("-----------------")
+		color.Green("result")
+		color.Red("-----------------")
+		fmt.Println("your sum:", b.PlayerSum)
+		fmt.Println("dealer sum:", b.DealerSum)
+		fmt.Println("you win: ", b.Player.CurrentBet)
+		fmt.Println("wallet: ", b.Player.Wallet)
+		color.Red("-----------------")
+	}
+	if b.State == "over" {
+		color.Red("-----------------")
+		color.Green("result")
+		color.Red("-----------------")
+		fmt.Println("your sum:", b.PlayerSum)
+		fmt.Println("dealer sum:", b.DealerSum)
+		playerDist := math.Abs(21.0 - float64(b.PlayerSum))
+		dealerDist := math.Abs(21.0 - float64(b.DealerSum))
+		if playerDist > dealerDist {
+			fmt.Println("dealer wins: ", b.Player.CurrentBet)
+		} else {
+			// update wallet
+			b.Player.Wallet += 2 * b.Player.CurrentBet
+			fmt.Println("you win: ", b.Player.CurrentBet)
+		}
+		fmt.Println("wallet: ", b.Player.Wallet)
+		color.Red("-----------------")
+	}
+}
+
 // Display : show game info
 func (b *Blackjack) Display() {
+	color.Blue("-----------------")
+	color.Yellow("current hand")
+	color.Blue("-----------------")
 	// print player wallet
-	fmt.Println("-----------------")
-	fmt.Println("wallet:- ", b.Player.Wallet)
-	fmt.Println("-----------------")
+	color.Green("-----------------")
+	color.Yellow("wallet")
+	color.Green("-----------------")
+	fmt.Println(b.Player.Wallet)
+	color.Blue("-----------------")
 	// show one dealer card
-	fmt.Println("dealer has:- ", b.Dealer.Drawn[0])
-	fmt.Println("-----------------")
+	color.Green("-----------------")
+	color.Yellow("dealer hand")
+	color.Green("-----------------")
+	fmt.Println(b.Dealer.Drawn[0])
+	color.Blue("-----------------")
 	// show cards
-	fmt.Println("hand:- ", b.Player.Drawn)
-	fmt.Println("-----------------")
+	color.Green("-----------------")
+	color.Yellow("your hand")
+	color.Green("-----------------")
+	fmt.Println(b.Player.Drawn)
+	color.Blue("-----------------")
 	// show bet if placed
 	if b.Player.CurrentBet != 0 {
-		fmt.Println("bet:- ", b.Player.CurrentBet)
-		fmt.Println("-----------------")
+		color.Green("-----------------")
+		color.Yellow("your bet")
+		color.Green("-----------------")
+		fmt.Println(b.Player.CurrentBet)
+		color.Blue("-----------------")
 	}
 	// show game info if over
 	if b.State == "over" {
 		// winning conditions
-		if b.PlayerSum > 21 || b.DealerSum > b.PlayerSum {
-			// display results
-			fmt.Println("you:- ", b.PlayerSum)
-			fmt.Println("dealer:- ", b.DealerSum)
-			fmt.Println("dealer wins:- ", b.Player.CurrentBet)
-		}
-		if b.DealerSum > 21 || b.DealerSum < b.PlayerSum {
-			// update wallet
-			b.Player.Wallet += 2 * b.Player.CurrentBet
-			// display results
-			fmt.Println("you:- ", b.PlayerSum)
-			fmt.Println("dealer:- ", b.DealerSum)
-			fmt.Println("you win:-", b.Player.CurrentBet)
-		}
+		b.Result()
 	}
 }
 
@@ -162,7 +213,3 @@ func Load() {
 	json.Unmarshal([]byte(dat), &blackjack)
 	fmt.Println(blackjack)
 }
-
-// save and load functionality
-// add API to run gameplay from a RESTful endpoint
-// update main to start cli and optionally the API
