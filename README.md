@@ -1,4 +1,4 @@
-# cards ![build](https://github.com/abmamo/BlacJac/workflows/build/badge.svg?branch=main)
+# BlacJac ![build](https://github.com/abmamo/BlacJac/workflows/build/badge.svg?branch=main)
 cli blackjack game written in go
 
 ## quickstart
