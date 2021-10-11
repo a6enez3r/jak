@@ -34,7 +34,7 @@ vet:
 lint:
 	golint .
 build:
-	rm -rf builds && mkdir builds && chmod +x ./scripts/go-build-all && ./scripts/go-build-all && mv cards-* builds
+	rm -rf builds && mkdir builds && chmod +x ./scripts/go-build-all && ./scripts/go-build-all && mv BlacJac-* builds
 run:
 	go run main.go cli.go
 
