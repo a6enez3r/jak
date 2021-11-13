@@ -1,4 +1,4 @@
-module github.com/abmamo/cards
+module github.com/abmamo/blacjac
 
 go 1.14
 
