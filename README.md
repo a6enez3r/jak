@@ -2,9 +2,9 @@
 cli blackjack game written in go (mainly to explore cross platform builds in `golang`)
 
 ## quickstart
-download the binary for your platform using `curl`
+download the binary [for your platform using] `curl`
 ```
-
+    curl -L  https://github.com/abmamo/BlacJac/raw/main/builds/BlacJac-darwin-amd64 >> BlacJac && chmod +x ./BlacJac
 ```
 and run it
 ```
