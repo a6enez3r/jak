@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"strconv"
 
-	"github.com/abmamo/cards/blackjack"
+	"github.com/abmamo/blacjac/blackjack"
 
 	"github.com/fatih/color"
 )
