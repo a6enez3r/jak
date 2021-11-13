@@ -1,5 +1,5 @@
-# cards ![build](https://github.com/abmamo/cards/workflows/build/badge.svg?branch=main)
-cli blackjack game written in go
+# blacjac ![build](https://github.com/abmamo/blacjac/workflows/build/badge.svg?branch=main)
+cli blackjack game written in go (mainly to explore cross platform builds in `golang`)
 
 ## quickstart
 download the binary for your platform using `curl`
@@ -8,7 +8,7 @@ download the binary for your platform using `curl`
 ```
 and run it
 ```
-    ./blackjack.game
+    ./blacjac-<whatever platform you want>
 ```
 
 ## develop
