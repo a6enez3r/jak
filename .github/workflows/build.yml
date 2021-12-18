@@ -5,24 +5,27 @@ on: [push, pull_request]
 jobs:
   build:
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        go-version: ['1.14.0', '1.15.0', '1.16.0']
+
     steps:
-    - uses: actions/checkout@v2
+      - uses: actions/checkout@v2
     
-    - name: set up Go
-      uses: actions/setup-go@v2
-      with:
-        go-version: '1.14.0' # The Go version to download (if necessary) and use.
+      - name: set up Go ${{ matrix.go-version }}
+        uses: actions/setup-go@v2
+        with:
+          go-version: ${{ matrix.go-version }}
     
-    - name: install
-      run: |
-        go get -u golang.org/x/lint/golint
-        sudo apt-get install build-essential
+      - name: deps
+        run: |
+          make deps-dev
 
-    - name: lint
-      run: make lint
+      - name: lint
+        run: make lint
 
-    - name: test
-      run: make test
+      - name: test
+        run: make test
 
-    - name: build
-      run: make build
+      - name: build
+        run: make build

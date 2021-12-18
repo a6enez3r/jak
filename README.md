@@ -12,22 +12,30 @@ and run it
 ```
 
 ## develop
-```
-    list of available app commands
+usage:
+  make <cmd>
 
-    lint            - lint app.
-    test            - test app.
-    test            - test app.
-    vet             - vet app.
-    build           - build app.
-    serve           - serve app.
-    benchmark       - benchmark app.
-
-    docker commands
-    up-env          - start dev container
-    up-cli          - start cli container
-    exec-env        - exec into dev container
-    exec-cli        - exec into cli container
-    purge-env       - purge dev container
-    purge-cli       - purge cli container
+cmds:
+  help                 show help
+  save-local           save changes locally using git
+  save-remote          save changes to remote using git
+  pull-remote          pull changes from remote
+  tag                  create new tag, recreate if it exists
+  deps-dev             install deps [dev]
+  build                cross platform build
+  run                  run package
+  test                 test package
+  benchmark            benchmark package
+  coverage             test coverage
+  vet                  vet modules
+  lint                 lint package
+  format               format package
+  scan-duplicate       scan package for duplicate code [dupl]
+  scan-errors          scan package for errors [errcheck]
+  scan-security        scan package for security issues [gosec]
+  build-env            build docker env
+  up-env               start docker env
+  exec-env             exec. into docker env
+  purge-env            remove docker env
+  init-env             init env + install common tools
 ```
