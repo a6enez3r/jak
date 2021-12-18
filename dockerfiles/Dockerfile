@@ -1,16 +1,16 @@
 # Base image
 FROM golang:alpine
-# Init alpine env
-RUN apk add --update make
 # Init Go env
 ENV GO111MODULE=on \
     CGO_ENABLED=0 \
     GOOS=linux \
     GOARCH=amd64
-# Set work dir
+# Current dir
 WORKDIR /build
 # Copy files to work dir
 COPY . /build
+# Init alpine env
+RUN apk add --update make
 # Env
 RUN make init-env
 # Deps
