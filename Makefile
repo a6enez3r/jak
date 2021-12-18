@@ -87,10 +87,7 @@ tag:
 ## install deps [dev]
 deps-dev:
 	# gosec
-	curl -sfL https://raw.githubusercontent.com/securego/gosec/master/install.sh >> gosec.sh
-	chmod +x gosec.sh
-	./gosec.sh -b $(go env GOPATH)/bin v2.9.5
-	rm gosec.sh
+	sudo curl -sfL https://raw.githubusercontent.com/securego/gosec/master/install.sh | sudo sh -s -- -b $(go env GOPATH)/bin v2.9.5
 	# golines
 	go install github.com/segmentio/golines@latest
 	# errcheck
