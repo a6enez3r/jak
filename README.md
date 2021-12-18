@@ -1,14 +1,14 @@
-# blacjac ![build](https://github.com/abmamo/blacjac/workflows/build/badge.svg?branch=main)
-cli blackjack game written in go (mainly to explore cross platform builds in `golang`)
+# jak ![build](https://github.com/abmamo/jak/workflows/build/badge.svg?branch=main)
+blackjack game written in go (mainly to explore cross platform builds :))
 
 ## quickstart
-download the binary [for your platform using] `curl`
+download the binary [for your platform] using `curl`
 ```
-    curl -L  https://github.com/abmamo/BlacJac/raw/main/builds/BlacJac-darwin-amd64 >> BlacJac && chmod +x ./BlacJac
+    curl -L  https://github.com/abmamo/jak/raw/main/builds/jak-darwin-amd64 >> jak && chmod +x ./jak
 ```
-and run it
+and play it
 ```
-    ./blacjac-<whatever platform you want>
+    ./jak
 ```
 
 ## develop
