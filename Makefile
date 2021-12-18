@@ -89,15 +89,15 @@ deps-dev:
 	# gosec
 	sudo curl -sfL https://raw.githubusercontent.com/securego/gosec/master/install.sh | sudo sh -s -- -b $(go env GOPATH)/bin v2.9.5
 	# golines
-	go install github.com/segmentio/golines@latest
+	GO111MODULE=on go install github.com/segmentio/golines@latest
 	# errcheck
-	go install github.com/kisielk/errcheck@latest
+	GO111MODULE=on go install github.com/kisielk/errcheck@latest
 	# dupl
-	go install github.com/mibk/dupl@latest
+	GO111MODULE=on go install github.com/mibk/dupl@latest
 	# golint
-	go install golang.org/x/lint/golint@latest
+	GO111MODULE=on go install golang.org/x/lint/golint@latest
 	# deps
-	go mod download
+	GO111MODULE=on go mod download
 	
 ## cross platform build
 build:
