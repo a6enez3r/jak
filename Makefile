@@ -15,6 +15,9 @@ endif
 ifeq ($(envname),)
 envname := jak
 endif
+ifeq ($(${depcmd}),)
+depcmd := install
+endif
 
 # COLORS
 ifneq (,$(findstring xterm,${TERM}))
@@ -89,13 +92,13 @@ deps-dev:
 	# gosec
 	sudo curl -sfL https://raw.githubusercontent.com/securego/gosec/master/install.sh | sudo sh -s -- -b $(go env GOPATH)/bin v2.9.5
 	# golines
-	go install github.com/segmentio/golines@latest
+	go ${depcmd} github.com/segmentio/golines@latest
 	# errcheck
-	go install github.com/kisielk/errcheck@latest
+	go ${depcmd} github.com/kisielk/errcheck@latest
 	# dupl
-	go install github.com/mibk/dupl@latest
+	go ${depcmd} github.com/mibk/dupl@latest
 	# golint
-	go install golang.org/x/lint/golint@latest
+	go ${depcmd} golang.org/x/lint/golint@latest
 	# deps
 	go mod download
 	
