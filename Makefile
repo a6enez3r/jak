@@ -9,11 +9,11 @@ endif
 ifeq ($(branch),)
 branch := main
 endif
-ifeq ($(env),)
-env := jak:dev
+ifeq ($(cname),)
+cname := jak
 endif
-ifeq ($(envname),)
-envname := jak
+ifeq ($(${envtype}),)
+envtype := dev
 endif
 ifeq ($(${depcmd}),)
 depcmd := install
@@ -88,7 +88,7 @@ tag:
 
 # DEV #
 ## install deps [dev]
-deps-dev:
+deps:
 	# gosec
 	sudo curl -sfL https://raw.githubusercontent.com/securego/gosec/master/install.sh | sudo sh -s -- -b $(go env GOPATH)/bin v2.9.5
 	# golines
@@ -152,19 +152,19 @@ scan-security:
 # Docker #
 ## build docker env
 build-env:
-	docker build -t ${env} -f dockerfiles/Dockerfile . 
+	@docker build -t ${cname}:${envtype} -f dockerfiles/Dockerfile.${envtype} .
 
 ## start docker env
 up-env: build-env
-	$(eval cid = $(shell (docker ps -aqf "name=${envname}")))
+	$(eval cid = $(shell (docker ps -aqf "name=${cname}")))
 	$(if $(strip $(cid)), \
 		@echo "existing env container found. please run make purge-env",\
-		@echo "running env container..." && docker run -it -d -v $(CURDIR):/go/src/ --name ${envname} ${env} /bin/bash)
+		@echo "running env container..." && docker run -it -d -v $(CURDIR):/go/src/ --name ${cname} ${cname}:${envtype} /bin/bash)
 	$(endif)
 
 ## exec. into docker env
 exec-env:
-	$(eval cid = $(shell (docker ps -aqf "name=${envname}")))
+	$(eval cid = $(shell (docker ps -aqf "name=${cname}")))
 	$(if $(strip $(cid)), \
 		@echo "exec into env container..." && docker exec -it ${cid} bash,\
 		@echo "env container not running.")
@@ -172,10 +172,18 @@ exec-env:
 
 ## remove docker env
 purge-env:
-	$(eval cid = $(shell (docker ps -aqf "name=${envname}")))
+	$(eval cid = $(shell (docker ps -aqf "name=${cname}")))
 	$(if $(strip $(cid)), \
-		@echo "purging env container..." && docker stop ${envname} && docker rm ${envname},\
+		@echo "purging env container..." && docker stop ${cname} && docker rm ${cname},\
 		@echo "env container not running.")
+	$(endif)
+
+## get status of docker env
+status-env:
+	$(eval cid = $(shell (docker ps -aqf "name=${cname}")))
+	$(if $(strip $(cid)), \
+		@echo "container running",\
+		@echo "container not running.")
 	$(endif)
 
 ## init env + install common tools
