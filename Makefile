@@ -9,11 +9,14 @@ endif
 ifeq ($(branch),)
 branch := main
 endif
-ifeq ($(cname),)
-cname := jak
-endif
 ifeq ($(${envtype}),)
 envtype := dev
+endif
+ifeq ($(cname),)
+cname := jak_${envtype}
+endif
+ifeq ($(ctag),)
+ctag := latest
 endif
 ifeq ($(${depcmd}),)
 depcmd := install
@@ -152,14 +155,14 @@ scan-security:
 # Docker #
 ## build docker env
 build-env:
-	@docker build -t ${cname}:${envtype} -f dockerfiles/Dockerfile.${envtype} .
+	@docker build -t ${cname}:${ctag} -f dockerfiles/Dockerfile.${envtype} .
 
 ## start docker env
 up-env: build-env
 	$(eval cid = $(shell (docker ps -aqf "name=${cname}")))
 	$(if $(strip $(cid)), \
 		@echo "existing env container found. please run make purge-env",\
-		@echo "running env container..." && docker run -it -d -v $(CURDIR):/go/src/ --name ${cname} ${cname}:${envtype} /bin/bash)
+		@echo "running env container..." && docker run -it -d -v $(CURDIR):/go/src/ --name ${cname} ${cname}:${ctag} /bin/bash)
 	$(endif)
 
 ## exec. into docker env
