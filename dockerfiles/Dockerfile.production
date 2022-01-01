@@ -14,7 +14,7 @@ RUN apk add --update make
 # Env
 RUN make init-env
 # Deps
-RUN make deps-dev
+RUN make deps
 # Vetting
 RUN make vet
 # Formatting
@@ -23,3 +23,5 @@ RUN make format
 RUN make lint
 # Testing
 RUN make test
+# Run
+CMD make -w run
