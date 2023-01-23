@@ -2,4 +2,4 @@ module github.com/abmamo/blacjac
 
 go 1.14
 
-require github.com/fatih/color v1.13.0 // indirect
+require github.com/fatih/color v1.14.0
