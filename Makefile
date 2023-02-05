@@ -110,7 +110,7 @@ tag:
 ## install deps [dev]
 deps:
 	# gosec
-	sudo curl -sfL https://raw.githubusercontent.com/securego/gosec/master/install.sh | sudo sh -s -- -b $(go env GOPATH)/bin v2.9.5
+	# sudo curl -sfL https://raw.githubusercontent.com/securego/gosec/master/install.sh | sudo sh -s -- -b $(go env GOPATH)/bin v2.9.5
 	# golines
 	go ${depcmd} github.com/segmentio/golines@latest
 	# errcheck
@@ -118,7 +118,7 @@ deps:
 	# dupl
 	go ${depcmd} github.com/mibk/dupl@latest
 	# golint
-	go ${depcmd} golang.org/x/lint/golint@latest
+	go get golang.org/x/lint/golint
 	# deps
 	go mod download
 	
@@ -128,7 +128,7 @@ build:
 
 ## run package
 run:
-	go run main.go cli.go
+	go run main.go
 
 ## test package
 test:
@@ -136,7 +136,7 @@ test:
 
 ## benchmark package
 benchmark:
-	go test -bench=. ./blackjack/
+	go test -bench=. ./jak/
 
 ## test coverage
 coverage:
@@ -148,15 +148,25 @@ vet:
 
 ## -- code quality --
 
+UNAME_S := $(shell uname -s)
+
 ## lint package
 lint:
-	golint .
+ifeq ($(UNAME_S),Linux)
+	@~/go/bin/golint .
+endif
+ifeq ($(UNAME_S),Darwin)
+	@golint .
+endif
+	
 
 ## format package
 format:
-	golines main.go
-	golines cli.go
-	golines blackjack
+	golines -w main.go
+	golines -w base62
+	golines -w config
+	golines -w handler
+	golines -w storage
 
 ## scan package for duplicate code [dupl]
 scan-duplicate:
