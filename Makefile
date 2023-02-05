@@ -150,7 +150,7 @@ vet:
 
 ## lint package
 lint:
-	echo "$(shell go env GOPATH)"
+	ls $(shell go env GOPATH)
 	$(shell go env GOPATH)/bin/golint .
 
 ## format package
