@@ -18,9 +18,6 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       
-      - name: Setup upterm session
-        uses: lhotari/action-upterm@v1
-
       - name: set up Go ${{ matrix.go-version }}
         uses: actions/setup-go@v2
         with:
@@ -28,7 +25,8 @@ jobs:
     
       - name: deps
         run: |
-          make deps depcmd=get
+          export GOPATH=$HOME/go
+          make deps
 
       - name: lint
         run: make lint
@@ -38,3 +36,5 @@ jobs:
 
       - name: build
         run: make build
+
+      
