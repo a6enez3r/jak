@@ -118,7 +118,7 @@ deps:
 	# dupl
 	go ${depcmd} github.com/mibk/dupl@latest
 	# golint
-	go ${depcmd} golang.org/x/lint/golint
+	go get golang.org/x/lint/golint
 	# deps
 	go mod download
 	
