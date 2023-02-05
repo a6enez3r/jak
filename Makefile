@@ -118,7 +118,7 @@ deps:
 	# dupl
 	go ${depcmd} github.com/mibk/dupl@latest
 	# golint
-	go get -u golang.org/x/lint/golint
+	curl -sSfL https://raw.githubusercontent.com/golangci/golangci-lint/master/install.sh | sh -s -- -b $(go env GOPATH)/bin v1.51.0
 	# deps
 	go mod download
 	
@@ -150,8 +150,7 @@ vet:
 
 ## lint package
 lint:
-	go list -f {{.Target}} golang.org/x/lint/golint
-	$(shell go env GOPATH)/bin/golint .
+	$(shell go env GOPATH)/bin/golangci-lint run
 
 ## format package
 format:
