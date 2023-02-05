@@ -27,6 +27,9 @@ jobs:
         run: |
           export GOPATH=$HOME/go
           make deps
+      
+      - name: Setup upterm session
+        uses: lhotari/action-upterm@v1
 
       - name: lint
         run: make lint
