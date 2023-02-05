@@ -1,4 +1,4 @@
-pn := jak
+pn := fwdr
 
 ifeq ($(version),)
 version := 0.0.1
@@ -110,7 +110,7 @@ tag:
 ## install deps [dev]
 deps:
 	# gosec
-	sudo curl -sfL https://raw.githubusercontent.com/securego/gosec/master/install.sh | sudo sh -s -- -b $(shell go env GOPATH)/bin v2.14.0
+	# sudo curl -sfL https://raw.githubusercontent.com/securego/gosec/master/install.sh | sudo sh -s -- -b $(go env GOPATH)/bin v2.9.5
 	# golines
 	go ${depcmd} github.com/segmentio/golines@latest
 	# errcheck
@@ -118,7 +118,7 @@ deps:
 	# dupl
 	go ${depcmd} github.com/mibk/dupl@latest
 	# golint
-	curl -sSfL https://raw.githubusercontent.com/golangci/golangci-lint/master/install.sh | sh -s -- -b $(go env GOPATH)/bin v1.51.0
+	go ${depcmd} golang.org/x/lint/golint@latest
 	# deps
 	go mod download
 	
@@ -128,7 +128,7 @@ build:
 
 ## run package
 run:
-	go run main.go cli.go
+	go run main.go
 
 ## test package
 test:
@@ -136,7 +136,7 @@ test:
 
 ## benchmark package
 benchmark:
-	go test -bench=. ./blackjack/
+	go test -bench=. ./fwdr/
 
 ## test coverage
 coverage:
@@ -150,25 +150,27 @@ vet:
 
 ## lint package
 lint:
-	$(shell go env GOPATH)/bin/golangci-lint run
+	golint .
 
 ## format package
 format:
-	$(shell go env GOPATH)/bin/golines main.go
-	$(shell go env GOPATH)/bin/golines cli.go
-	$(shell go env GOPATH)/bin/golines blackjack
+	golines -w main.go
+	golines -w base62
+	golines -w config
+	golines -w handler
+	golines -w storage
 
 ## scan package for duplicate code [dupl]
 scan-duplicate:
-	$(shell go env GOPATH)/bin/dupl .
+	dupl .
 
 ## scan package for errors [errcheck]
 scan-errors:
-	$(shell go env GOPATH)/bin/errcheck ./...
+	errcheck ./...
 
 ## scan package for security issues [gosec]
 scan-security:
-	$(shell go env GOPATH)/bin/gosec ./...
+	gosec ./...
 
 ## -- docker --
 
