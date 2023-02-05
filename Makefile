@@ -148,9 +148,17 @@ vet:
 
 ## -- code quality --
 
+UNAME_S := $(shell uname -s)
+
 ## lint package
 lint:
-	${GOPATH}/bin/golint .
+ifeq ($(UNAME_S),Linux)
+	@~/go/bin/golint .
+endif
+ifeq ($(UNAME_S),Darwin)
+	@golint .
+endif
+	
 
 ## format package
 format:
