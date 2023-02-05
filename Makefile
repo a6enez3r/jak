@@ -150,7 +150,7 @@ vet:
 
 ## lint package
 lint:
-	$GOPATH/bin/golint .
+	$$GOPATH/bin/golint .
 
 ## format package
 format:
