@@ -150,13 +150,13 @@ vet:
 
 ## lint package
 lint:
-	golint .
+	$(shell go env GOPATH)/bin/golint .
 
 ## format package
 format:
-	golines main.go
-	golines cli.go
-	golines blackjack
+	$(shell go env GOPATH)/bin/golines main.go
+	$(shell go env GOPATH)/bin/golines cli.go
+	$(shell go env GOPATH)/bin/golines blackjack
 
 ## scan package for duplicate code [dupl]
 scan-duplicate:
