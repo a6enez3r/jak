@@ -150,6 +150,7 @@ vet:
 
 ## lint package
 lint:
+	echo "$(shell go env GOPATH)"
 	$(shell go env GOPATH)/bin/golint .
 
 ## format package
@@ -160,15 +161,15 @@ format:
 
 ## scan package for duplicate code [dupl]
 scan-duplicate:
-	dupl .
+	$(shell go env GOPATH)/bin/dupl .
 
 ## scan package for errors [errcheck]
 scan-errors:
-	errcheck ./...
+	$(shell go env GOPATH)/bin/errcheck ./...
 
 ## scan package for security issues [gosec]
 scan-security:
-	gosec ./...
+	$(shell go env GOPATH)/bin/gosec ./...
 
 ## -- docker --
 
