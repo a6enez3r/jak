@@ -121,8 +121,8 @@ tag:
 deps:
 	# tools
 	@sudo curl -sfL https://raw.githubusercontent.com/securego/gosec/master/install.sh | sudo sh -s -- -b $(shell go env GOPATH)/bin v2.9.5
-	@go ${dep_cmd} golang.org/x/lint/golint
-	@go ${dep_cmd} golang.org/x/tools/cmd/godoc
+	@go ${dep_cmd} golang.org/x/lint/golint@latest
+	@go ${dep_cmd} go101.org/golds@latest
 	@go ${dep_cmd} github.com/segmentio/golines@latest
 	@go ${dep_cmd} github.com/kisielk/errcheck@latest
 	@go ${dep_cmd} github.com/mibk/dupl@latest
@@ -180,6 +180,12 @@ scan-errors:
 ## scan package for security issues [gosec]
 scan-security:
 	@${bin_path}gosec ./...
+
+## -- docs --
+
+## serve docs [godoc]
+docs-serve:
+	${bin_path}golds ./...
 
 ## -- docker --
 

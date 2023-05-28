@@ -1,9 +1,11 @@
-module github.com/abmamo/blacjac
+module github.com/a6enez3r/jak
 
-go 1.14
+go 1.18
+
+require github.com/fatih/color v1.15.0
 
 require (
-	github.com/fatih/color v1.15.0
-	golang.org/x/lint v0.0.0-20210508222113-6edffad5e616 // indirect
-	golang.org/x/tools v0.9.1 // indirect
+	github.com/mattn/go-colorable v0.1.13 // indirect
+	github.com/mattn/go-isatty v0.0.17 // indirect
+	golang.org/x/sys v0.8.0 // indirect
 )
