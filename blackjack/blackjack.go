@@ -3,13 +3,11 @@ package blackjack
 import (
 	"encoding/json"
 	"fmt"
-	"math"
 	"io/ioutil"
+	"math"
 	"path/filepath"
 
 	"github.com/fatih/color"
-
-
 )
 
 // Blackjack : will have a player, a dealer and a deck

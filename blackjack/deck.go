@@ -81,7 +81,21 @@ func (d *Deck) Draw() Card {
 func MakeDeck() Deck {
 	// constants
 	suites := []string{"spades", "hearts", "diamonds", "clubs"}
-	names := []string{"two", "three", "four", "five", "six", "seven", "eight", "nine", "ten", "Jack", "Queen", "King", "Ace"}
+	names := []string{
+		"two",
+		"three",
+		"four",
+		"five",
+		"six",
+		"seven",
+		"eight",
+		"nine",
+		"ten",
+		"Jack",
+		"Queen",
+		"King",
+		"Ace",
+	}
 	values := []int{2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 10, 10}
 	// init deck
 	deck := Deck{Suites: suites, Names: names, Values: values}
@@ -89,7 +103,10 @@ func MakeDeck() Deck {
 	for _, suite := range suites {
 		// add all values & names
 		for idx := range values {
-			deck.Cards = append(deck.Cards, Card{Suite: suite, Name: names[idx], Value: values[idx]})
+			deck.Cards = append(
+				deck.Cards,
+				Card{Suite: suite, Name: names[idx], Value: values[idx]},
+			)
 		}
 	}
 	// shuffle deck

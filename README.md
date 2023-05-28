@@ -1,17 +1,18 @@
-# jak ![build](https://github.com/abmamo/jak/workflows/build/badge.svg?branch=main)
+# `jak` [![pipeline](https://github.com/a6enez3r/jak/actions/workflows/pipeline.yml/badge.svg?branch=main)](https://github.com/a6enez3r/jak/actions/workflows/pipeline.yml)
+
 blackjack game written in go (mainly to explore cross platform builds :))
 
-## quickstart
+## `install`
 download the binary [for your platform] using `curl`
 ```
-    curl -L  https://github.com/abmamo/jak/raw/main/builds/jak-darwin-amd64 >> jak && chmod +x ./jak
+    curl -L  https://github.com/a6enez3r/jak/raw/main/builds/jak-darwin-amd64 >> jak && chmod +x ./jak
 ```
 and play it
 ```
     ./jak
 ```
 
-## develop
+## `quickstart`
 ```
 usage:
   make <cmd>
