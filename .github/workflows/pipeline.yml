@@ -30,7 +30,7 @@ jobs:
 
       - name: lint
         run: |
-          make lint
+          make lint bin_path=$HOME/go/bin
 
       - name: test
         run: make test
